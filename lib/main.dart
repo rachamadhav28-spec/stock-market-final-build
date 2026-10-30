@@ -106,7 +106,9 @@ class _Stage1ScreenState extends State<Stage1Screen> {
       final url = Uri.parse(
           'https://query1.finance.yahoo.com/v8/finance/chart/${stock.symbol}?interval=1m&range=1d');
       
-      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      final response = await http
+          .get(url, headers: {'User-Agent': 'Mozilla/5.0'})
+          .timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -277,7 +279,7 @@ class _Stage1ScreenState extends State<Stage1Screen> {
                       ],
                       const Spacer(),
                       const Divider(),
-                      const Text(
+                      Text(
                         'Google Finance Verification Test:\nOpen google.com/finance/quote/${selectedStock.symbol.replaceAll(".NS", ":NSE")} in your browser during market hours to compare this price.',
                         style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey),
                       ),
