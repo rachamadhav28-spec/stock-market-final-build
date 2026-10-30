@@ -1,8 +1,8 @@
 name: Build Android APK
 
 on:
-    push:
-      branches: [ "main", "master" ]
+  push:
+    branches: [ "main", "master" ]
 
 jobs:
   build:
@@ -25,8 +25,8 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Generate Native Android Scaffolding
-        run: flutter create . --platforms=android
+      - name: Generate Android Scaffolding
+        run: flutter create . --platforms=android --project-name=penny_trader
 
       - name: Build APK
         run: flutter build apk --release
